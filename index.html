@@ -20,6 +20,9 @@
 	<button id='btnPlay'>Play</button>
 	<button id='btnPause'>Pause</button>
 	<button id='btnStop'>Stop</button>
+	<br />
+	<button id='btnVolUp'>Volume +</button>
+	<button id='btnVolDn'>Volume -</button>
 		
 	<script>
 		var player;
@@ -29,6 +32,8 @@
 			document.getElementById('btnPlay').addEventListener('click', playMusic, false);
 			document.getElementById('btnPause').addEventListener('click', pauseMusic, false);
 			document.getElementById('btnStop').addEventListener('click', stopMusic, false);
+			document.getElementById('btnVolUp').addEventListener('click', volumeUp, false);
+			document.getElementById('btnVolDn').addEventListener('click', volumeDn, false);
 			player = document.getElementById('player');
 			
 			// music play controls **************
@@ -48,6 +53,28 @@
 				// resetting the playhead to the beginning of audio time
 				player.pause();
 				player.currentTime = 0;
+			};
+			
+			// increase the volume
+			// html5 volume ranges from 0.0 to 1.0
+			function volumeUp() {
+				if(player.volume <= 1) {
+					// increasing 10% for every click of button
+					player.volume += 0.1;
+					console.log(player.volume);
+				} else {
+					player.volume = 1;
+				}
+			};
+			
+			// turn the volume down
+			function volumeDn() {
+				if(player.volume >= 0) {
+					player.volume -= 0.1;
+					console.log(player.volume);
+				} else {
+					player.volume = 0;
+				}
 			};
 		}
 	</script>
