@@ -13,11 +13,43 @@
 	<![endif]-->
 </head>
 <body>
-	<audio controls='controls' autoplay preload='metadata'>
+	<audio id='player'>
 		<source src='sample.ogg' />
 		<source src='sample.mp3' />
 	</audio>
+	<button id='btnPlay'>Play</button>
+	<button id='btnPause'>Pause</button>
+	<button id='btnStop'>Stop</button>
 		
-	<script></script>
+	<script>
+		var player;
+		
+		// INIT *************************
+		window.onload = function() {
+			document.getElementById('btnPlay').addEventListener('click', playMusic, false);
+			document.getElementById('btnPause').addEventListener('click', pauseMusic, false);
+			document.getElementById('btnStop').addEventListener('click', stopMusic, false);
+			player = document.getElementById('player');
+			
+			// music play controls **************
+			function playMusic() {
+				player.play();
+			};
+			
+			// music pause controls ******
+			function pauseMusic() {
+				player.pause();
+			};
+			
+			// music stop controls *********
+			function stopMusic() {
+				// there is no 'stop' method in html5 audio element
+				// so we have to trick it by pausing the playhead and then
+				// resetting the playhead to the beginning of audio time
+				player.pause();
+				player.currentTime = 0;
+			};
+		}
+	</script>
 </body>
 </html>
